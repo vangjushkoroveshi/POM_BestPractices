@@ -1,8 +1,10 @@
 {
   "firstName": "demo",
   "lastName": "user",
-  "addressLineOne": "San Francisco",
-  "city": "San Francisco",
-  "postalCode": "94188",
+  "country": "Albania",
+  "addressLineOne": "Tirana",
+  "city": "Tirana",
+  "state": "Tirana",
+  "postalCode": "1001",
   "email": "demouser@gmail.com"
 }
