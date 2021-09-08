@@ -40,6 +40,7 @@ public class GuestCheckout extends BaseTest {
         CheckoutPage checkoutPage = cartPage.
                 checkout().
                 setBillingAddress(billingAddress).
+                selectDirectBankTransfer().
                 placeOrder();
         Assert.assertEquals(checkoutPage.getNotice(), "Thank you. Your order has been received.");
     }
@@ -49,7 +50,7 @@ public class GuestCheckout extends BaseTest {
         String searchFor = "Blue";
         BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAddress.json", BillingAddress.class);
         Product product = new Product(1215);
-        User user = new User("demouser2", "demopwd");
+        User user = new User("demouser3", "password");
 
         StorePage storePage = new HomePage(driver).
                 load().
@@ -58,17 +59,15 @@ public class GuestCheckout extends BaseTest {
         Assert.assertEquals(storePage.getTitle(), "Search results: “"+searchFor+"”");
 
         storePage.clickAddToCardBtn(Integer.toString(product.getId()));
-        Thread.sleep(5000);
         CartPage  cartPage = storePage.clickViewCart();
         Assert.assertEquals(cartPage.getProductName(), product.getName());
 
         CheckoutPage checkoutPage = cartPage.checkout();
         checkoutPage.clickHereToLoginLink();
-        Thread.sleep(3000);
-
         checkoutPage.
                 login(user).
                 setBillingAddress(billingAddress).
+                selectDirectBankTransfer().
                 placeOrder();
         Thread.sleep(5000);
         Assert.assertEquals(checkoutPage.getNotice(), "Thank you. Your order has been received.");

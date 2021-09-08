@@ -29,6 +29,8 @@ public class CheckoutPage extends BasePage {
     private By countryDropDown = By.id("billing_country");
     private By stateDropDown = By.id("billing_state");
 
+    private By directBankTransferRadioBtn = By.id("payment_method_bacs");
+
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
@@ -131,5 +133,12 @@ public class CheckoutPage extends BasePage {
         return enterUserName(user.getUsername()).
                enterPassword(user.getPassword()).
                clickLoginBtn();
+    }
+
+    public CheckoutPage selectDirectBankTransfer(){
+        WebElement e = wait.until(ExpectedConditions.elementToBeClickable(directBankTransferRadioBtn));
+        if (!e.isSelected())
+            e.click();
+        return this;
     }
 }

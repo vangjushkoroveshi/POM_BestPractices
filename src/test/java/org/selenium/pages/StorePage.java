@@ -48,5 +48,4 @@ public class StorePage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(viewCartLink)).click();
         return new CartPage(driver);
     }
-
 }
