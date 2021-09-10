@@ -1,4 +1,4 @@
-package org.selenium;
+package org.selenium.tests;
 
 import org.selenium.base.BaseTest;
 import org.selenium.objects.BillingAddress;
@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class GuestCheckout extends BaseTest {
+public class GuestCheckoutTest extends BaseTest {
 
     @Test
     public void guestCheckoutUsingDirectBankTransfer() throws IOException {
