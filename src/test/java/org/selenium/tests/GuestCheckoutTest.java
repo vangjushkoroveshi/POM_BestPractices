@@ -8,6 +8,7 @@ import org.selenium.pages.CartPage;
 import org.selenium.pages.CheckoutPage;
 import org.selenium.pages.HomePage;
 import org.selenium.pages.StorePage;
+import org.selenium.utils.ConfigLoader;
 import org.selenium.utils.JacksonUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -50,7 +51,7 @@ public class GuestCheckoutTest extends BaseTest {
         String searchFor = "Blue";
         BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAddress.json", BillingAddress.class);
         Product product = new Product(1215);
-        User user = new User("demouser3", "password");
+        User user = new User(ConfigLoader.getInstance().getUsername(), ConfigLoader.getInstance().getPassword());
 
         StorePage storePage = new HomePage(getDriver()).
                 load().
