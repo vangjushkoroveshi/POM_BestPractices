@@ -31,8 +31,15 @@ public class CheckoutPage extends BasePage {
 
     private By directBankTransferRadioBtn = By.id("payment_method_bacs");
 
+    private By productName = By.cssSelector("td[class='product-name']");
+
     public CheckoutPage(WebDriver driver) {
         super(driver);
+    }
+
+    public CheckoutPage load(){
+        load("/checkout/");
+        return this;
     }
 
     public CheckoutPage enterFirstName(String firsName){
@@ -140,5 +147,9 @@ public class CheckoutPage extends BasePage {
         if (!e.isSelected())
             e.click();
         return this;
+    }
+
+    public String getProductName(){
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(productName)).getText();
     }
 }
