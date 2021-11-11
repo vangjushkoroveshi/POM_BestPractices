@@ -40,11 +40,12 @@ public class StorePage extends BasePage {
        return wait.until(ExpectedConditions.visibilityOfElementLocated(title)).getText();
     }
 
-    private By getAddToCardBtnElement(String prouctID){
-         return By.xpath("//*[@data-product_id='"+prouctID+"']");
+    private By getAddToCardBtnElement(String productName){
+        return By.cssSelector("a[aria-label='Add “"+productName+"” to your cart'");
     }
-    public StorePage clickAddToCardBtn(String productID){
-        By addToCardBtn = getAddToCardBtnElement(productID);
+
+    public StorePage clickAddToCardBtn(String productName){
+        By addToCardBtn = getAddToCardBtnElement(productName);
         wait.until(ExpectedConditions.elementToBeClickable(addToCardBtn)).click();
         return this;
     }

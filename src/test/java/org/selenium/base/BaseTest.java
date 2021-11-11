@@ -8,6 +8,7 @@ import org.selenium.factory.DriverManager;
 import org.selenium.utils.CookiesUtils;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import java.util.List;
@@ -26,8 +27,9 @@ public class BaseTest {
 
     @Parameters("browser")
     @BeforeMethod
-    public void setUp(String browser){
-        browser = System.getProperty("browser", browser);
+    public void setUp(@Optional String browser){
+        if (browser == null) browser = "CHROME";
+//        browser = System.getProperty("browser", browser);
         setDriver(new DriverManager().initializeDriver(browser));
     }
 

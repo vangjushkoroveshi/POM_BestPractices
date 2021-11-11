@@ -1,18 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" verbose="1" parallel="tests" thread-count="2">
-    <test name="Chrome" parallel="methods" thread-count="2">
+    <test name="Chrome" parallel="methods" thread-count="6">
         <parameter name="browser" value="CHROME"></parameter>
-        <classes>
-            <class name="org.selenium.tests.GuestCheckoutTest"></class>
-        </classes>
+        <packages>
+            <package name="org.selenium.tests"></package>
+        </packages>
     </test>
 
-    <test name="Firefox" parallel="methods" thread-count="2">
-        <parameter name="browser" value="FIREFOX"></parameter>
-        <classes>
-            <class name="org.selenium.tests.GuestCheckoutTest"></class>
-        </classes>
-    </test>
-    
 </suite>
