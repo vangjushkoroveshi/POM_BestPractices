@@ -4,7 +4,9 @@ package org.selenium.base;
 import io.restassured.http.Cookies;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
-import org.selenium.factory.DriverManager;
+import org.selenium.constants.DriverType;
+import org.selenium.factory.DriverManagerFactory;
+import org.selenium.factory.DriverManagerOriginal;
 import org.selenium.utils.CookiesUtils;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -30,7 +32,8 @@ public class BaseTest {
     public synchronized void setUp(@Optional String browser){
 //        if (browser == null) browser = "CHROME";
         browser = System.getProperty("browser", browser);
-        setDriver(new DriverManager().initializeDriver(browser));
+//        setDriver(new DriverManagerOriginal().initializeDriver(browser));
+        setDriver(DriverManagerFactory.getManager(DriverType.valueOf(browser)).createDriver());
     }
 
     @AfterMethod
