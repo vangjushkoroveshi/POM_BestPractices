@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.selenium.constants.DriverType;
 import org.selenium.factory.DriverManagerFactory;
 import org.selenium.factory.DriverManagerOriginal;
+import org.selenium.factory.abstractFactory.DriverManagerAbstract;
+import org.selenium.factory.abstractFactory.DriverManagerFactoryAbstract;
 import org.selenium.utils.CookiesUtils;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -17,6 +19,7 @@ import java.util.List;
 
 public class BaseTest {
     private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private ThreadLocal<DriverManagerAbstract> driverManager = new ThreadLocal<>();
 
     protected void setDriver(WebDriver driver) {
         this.driver.set(driver);
@@ -26,6 +29,13 @@ public class BaseTest {
         return this.driver.get();
     }
 
+    protected void setDriverManager(DriverManagerAbstract driverManager) {
+        this.driverManager.set(driverManager);
+    }
+
+    protected DriverManagerAbstract getDriverManager() {
+        return this.driverManager.get();
+    }
 
     @Parameters("browser")
     @BeforeMethod
@@ -33,7 +43,9 @@ public class BaseTest {
 //        if (browser == null) browser = "CHROME";
         browser = System.getProperty("browser", browser);
 //        setDriver(new DriverManagerOriginal().initializeDriver(browser));
-        setDriver(DriverManagerFactory.getManager(DriverType.valueOf(browser)).createDriver());
+//        setDriver(DriverManagerFactory.getManager(DriverType.valueOf(browser)).createDriver());
+        setDriverManager(DriverManagerFactoryAbstract.getManager(DriverType.valueOf(browser)));
+        setDriver(getDriverManager().getDriver());
     }
 
     @AfterMethod
