@@ -4,16 +4,25 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.selenium.base.BasePage;
+import org.selenium.pages.components.ProductThumbnail;
 
 public class StorePage extends BasePage {
+
+
 
     private By searchField = By.id("woocommerce-product-search-field-0");
     private By searchBtn = By.cssSelector("button[value='Search']");
     private By title = By.xpath("//*[@class='woocommerce-products-header__title page-title']");
-    private By viewCartLink = By.xpath("//*[@title='View cart']");
+
+    private ProductThumbnail productThumbnail;
+
+    public ProductThumbnail getProductThumbnail() {
+        return productThumbnail;
+    }
 
     public StorePage(WebDriver driver) {
         super(driver);
+        productThumbnail =  new ProductThumbnail(driver);
     }
 
     private StorePage enterTextInSearchField(String txt){
@@ -38,20 +47,5 @@ public class StorePage extends BasePage {
 
     public String getTitle(){
        return wait.until(ExpectedConditions.visibilityOfElementLocated(title)).getText();
-    }
-
-    private By getAddToCardBtnElement(String productName){
-        return By.cssSelector("a[aria-label='Add “"+productName+"” to your cart'");
-    }
-
-    public StorePage clickAddToCardBtn(String productName){
-        By addToCardBtn = getAddToCardBtnElement(productName);
-        wait.until(ExpectedConditions.elementToBeClickable(addToCardBtn)).click();
-        return this;
-    }
-
-    public CartPage clickViewCart(){
-        wait.until(ExpectedConditions.elementToBeClickable(viewCartLink)).click();
-        return new CartPage(driver);
     }
 }

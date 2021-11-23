@@ -27,14 +27,14 @@ public class BaseTest {
 
     @Parameters("browser")
     @BeforeMethod
-    public void setUp(@Optional String browser){
-        if (browser == null) browser = "CHROME";
-//        browser = System.getProperty("browser", browser);
+    public synchronized void setUp(@Optional String browser){
+//        if (browser == null) browser = "CHROME";
+        browser = System.getProperty("browser", browser);
         setDriver(new DriverManager().initializeDriver(browser));
     }
 
     @AfterMethod
-    public void tearDown(){
+    public synchronized void tearDown(){
         getDriver().quit();
     }
 

@@ -28,14 +28,14 @@ public class GuestCheckoutTest extends BaseTest {
         Product product = new Product(1215);
 
         StorePage storePage = new HomePage(getDriver()).
-                load().
+                load().getMyHeader().
                 navigateToStoreUsingMenu().
                 search(searchFor);
         Assert.assertEquals(storePage.getTitle(), "Search results: “"+searchFor+"”");
 
-        storePage.clickAddToCardBtn(Integer.toString(product.getId()));
+        storePage.getProductThumbnail().clickAddToCardBtn(product.getName());
 
-        CartPage  cartPage = storePage.clickViewCart();
+        CartPage  cartPage = storePage.getProductThumbnail().clickViewCart();
         Assert.assertEquals(cartPage.getProductName(), product.getName());
 
         CheckoutPage checkoutPage = cartPage.
@@ -54,13 +54,13 @@ public class GuestCheckoutTest extends BaseTest {
         User user = new User(ConfigLoader.getInstance().getUsername(), ConfigLoader.getInstance().getPassword());
 
         StorePage storePage = new HomePage(getDriver()).
-                load().
+                load().getMyHeader().
                 navigateToStoreUsingMenu().
                 search(searchFor);
         Assert.assertEquals(storePage.getTitle(), "Search results: “"+searchFor+"”");
 
-        storePage.clickAddToCardBtn(Integer.toString(product.getId()));
-        CartPage  cartPage = storePage.clickViewCart();
+        storePage.getProductThumbnail().clickAddToCardBtn(product.getName());
+        CartPage  cartPage = storePage.getProductThumbnail().clickViewCart();
         Assert.assertEquals(cartPage.getProductName(), product.getName());
 
         CheckoutPage checkoutPage = cartPage.checkout();
