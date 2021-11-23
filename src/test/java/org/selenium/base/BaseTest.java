@@ -24,8 +24,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class BaseTest {
-    private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    private ThreadLocal<DriverManagerAbstract> driverManager = new ThreadLocal<>();
+    private final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private final ThreadLocal<DriverManagerAbstract> driverManager = new ThreadLocal<>();
 
     protected void setDriver(WebDriver driver) {
         this.driver.set(driver);
